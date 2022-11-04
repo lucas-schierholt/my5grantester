@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: open5gs-my5grantester
+  namespace: open5gs
+  labels:
+    epc-mode: my5grantester
+spec:
+  selector:
+    epc-mode: my5grantester
+  ports:
+    - name: open5gs-my5grantester-tcp-80
+      protocol: TCP
+      port: 80
+    - name: open5gs-my5grantester-tcp-3000
+      protocol: TCP
+      port: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open5gs-my5grantester
+  namespace: open5gs
+  labels:
+    epc-mode: my5grantester
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      epc-mode: my5grantester
+    template:
+      metadata:
+        labels:
+          epc-mode: my5grantester
+      spec:
+        nodeSelector: 
+          kubernetes.io/arch: amd64
+          kubernetes.io/hostname: molejo
+        containers:
+          - name: my5grantester
+            image: 00275559/my5grantester:latest
+            securityContext:
+            privileged: true
+            capabilities:
+              add: ["NET_ADMIN", "SYS_MODULE"]
+            volumeMounts:
+              - name: "dev-net-tun"
+                mountPath: "/dev/net/tun" # Needed for VPN
+            command: ["sed", "-i", ""]
+            command: ["top"]
+          volumes:
+            - name: dev-net-tun
+              hostPath:
+                path: /dev/net/tun
