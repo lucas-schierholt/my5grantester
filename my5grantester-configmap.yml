@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open5gs-my5grantester-config
+  namespace: open5gs
+  labels:
+    epc-mode: my5grantester
+data:
+  number-ues: 1000
+  number-gnbs: 10
+  start-delay: 60
+  sleep-conn: 500
+  my5grantester.yaml: |
+    logger:
+        file: /var/log/open5gs/my5grantester.log
