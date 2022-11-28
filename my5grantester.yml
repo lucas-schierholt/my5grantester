@@ -25,7 +25,7 @@ metadata:
     epc-mode: my5grantester
 spec:
   replicas: 1
-  selector: 
+  selector:
     matchLabels:
       epc-mode: my5grantester
   template:
@@ -63,3 +63,4 @@ spec:
         - name: dev-net-tun
           hostPath:
             path: /dev/net/tun
+
