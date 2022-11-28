@@ -33,7 +33,7 @@ spec:
       labels:
         epc-mode: my5grantester
     spec:
-      nodeSelector: 
+      nodeSelector:
         kubernetes.io/arch: amd64
         kubernetes.io/hostname: molejo
       containers:
