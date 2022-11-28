@@ -40,9 +40,9 @@ spec:
         - name: my5grantester
           image: 00275559/my5grantester:latest
           securityContext:
-          privileged: true
-          capabilities:
-            add: ["NET_ADMIN"]
+            privileged: true
+            capabilities:
+              add: ["NET_ADMIN"]
             #healthcheck:
               #test: /bin/bash -c "ip addr | grep uetun1"
               #interval: 10s
