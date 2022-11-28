@@ -28,38 +28,38 @@ spec:
   selector: 
     matchLabels:
       epc-mode: my5grantester
-    template:
-      metadata:
-        labels:
-          epc-mode: my5grantester
-      spec:
-        nodeSelector: 
-          kubernetes.io/arch: amd64
-          kubernetes.io/hostname: molejo
-        containers:
-          - name: my5grantester
-            image: 00275559/my5grantester:latest
-            securityContext:
-            privileged: true
-            capabilities:
-              add: ["NET_ADMIN"]
+  template:
+    metadata:
+      labels:
+        epc-mode: my5grantester
+    spec:
+      nodeSelector: 
+        kubernetes.io/arch: amd64
+        kubernetes.io/hostname: molejo
+      containers:
+        - name: my5grantester
+          image: 00275559/my5grantester:latest
+          securityContext:
+          privileged: true
+          capabilities:
+            add: ["NET_ADMIN"]
             #healthcheck:
               #test: /bin/bash -c "ip addr | grep uetun1"
               #interval: 10s
               #timeout: 5s
               #retries: 5
-            volumeMounts:
-              - name: my5grantester-config
-                # mountPath: /etc/my5grantester-config.yaml
-                mountPath: /open5gs/config-map/my5grantester-config.yaml
-                subPath: "my5grantester-config.yaml"
-              - name: "dev-net-tun"
-                mountPath: "/dev/net/tun" # Needed for VPN
-            # command: ["./app ${TEST_PARAMETERS}"]
-          volumes:
-            - name: open5gs-my5grantester-config
-              configMap:
-                name: open5gs-my5grantester-config
-            - name: dev-net-tun
-              hostPath:
-                path: /dev/net/tun
+          volumeMounts:
+            - name: my5grantester-config
+              # mountPath: /etc/my5grantester-config.yaml
+              mountPath: /open5gs/config-map/my5grantester-config.yaml
+              subPath: "my5grantester-config.yaml"
+            - name: "dev-net-tun"
+              mountPath: "/dev/net/tun" # Needed for VPN
+          # command: ["./app ${TEST_PARAMETERS}"]
+        volumes:
+          - name: open5gs-my5grantester-config
+            configMap:
+              name: open5gs-my5grantester-config
+          - name: dev-net-tun
+            hostPath:
+              path: /dev/net/tun
