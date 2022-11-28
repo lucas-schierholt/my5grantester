@@ -56,10 +56,10 @@ spec:
             - name: "dev-net-tun"
               mountPath: "/dev/net/tun" # Needed for VPN
           # command: ["./app ${TEST_PARAMETERS}"]
-        volumes:
-          - name: open5gs-my5grantester-config
-            configMap:
-              name: open5gs-my5grantester-config
-          - name: dev-net-tun
-            hostPath:
-              path: /dev/net/tun
+      volumes:
+        - name: open5gs-my5grantester-config
+          configMap:
+            name: open5gs-my5grantester-config
+        - name: dev-net-tun
+          hostPath:
+            path: /dev/net/tun
