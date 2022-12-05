@@ -27,7 +27,6 @@ spec:
             add: ["NET_ADMIN"]
         volumeMounts:
         - name: my5grantester-config
-             mountPath: /etc/my5grantester-config.yaml
           mountPath: /open5gs/config-map/my5grantester-config.yaml
           subPath: "my5grantester-config.yaml"
         - name: "dev-net-tun"
