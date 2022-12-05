@@ -26,9 +26,6 @@ spec:
             capabilities:
               add: ["NET_ADMIN"]
           volumeMounts:
-            - name: open5gs-my5grantester-config
-            mountPath: /open5gs/config-map/my5grantester-config.yaml
-            subPath: "my5grantester-config.yaml"
             - name: "dev-net-tun"
               mountPath: "/dev/net/tun" # Needed for VPN
       volumes:  
