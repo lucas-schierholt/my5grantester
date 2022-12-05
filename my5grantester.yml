@@ -30,13 +30,13 @@ spec:
               #interval: 10s
               #timeout: 5s
               #retries: 5
-        volumeMounts:
-        - name: my5grantester-config
+        #volumeMounts:
+        #- name: my5grantester-config
             # mountPath: /etc/my5grantester-config.yaml
-          mountPath: /open5gs/config-map/my5grantester-config.yaml
-          subPath: "my5grantester-config.yaml"
-        - name: "dev-net-tun"
-          mountPath: "/dev/net/tun" # Needed for VPN
+        #  mountPath: /open5gs/config-map/my5grantester-config.yaml
+        #  subPath: "my5grantester-config.yaml"
+        #- name: "dev-net-tun"
+        #  mountPath: "/dev/net/tun" # Needed for VPN
           # command: ["./app ${TEST_PARAMETERS}"]
       volumes:
       - name: open5gs-my5grantester-config
