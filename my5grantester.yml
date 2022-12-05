@@ -21,15 +21,15 @@ spec:
       containers:
         - name: my5grantester
           image: 00275559/my5grantester:latest
-          securityContext:
-            privileged: true
-            capabilities:
-              add: ["NET_ADMIN"]
-      volumes:  
-        - name: open5gs-my5grantester-config
-          configMap:
-            name: open5gs-my5grantester-config
-        - name: dev-net-tun
-          hostPath:
-            path: /dev/net/tun
+          #securityContext:
+          #  privileged: true
+          #  capabilities:
+          #    add: ["NET_ADMIN"]
+      #volumes:  
+      #  - name: open5gs-my5grantester-config
+      #    configMap:
+      #      name: open5gs-my5grantester-config
+      #  - name: dev-net-tun
+      #    hostPath:
+      #      path: /dev/net/tun
 
