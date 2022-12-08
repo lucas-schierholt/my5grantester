@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: open5gs-my5grantester
+  namespace: open5gs
+  labels:
+    epc-mode: my5grantester
+spec:
+  selector:
+    epc-mode: my5grantester
+  ports:
+    - name: open5gs-my5grantester-tcp-80
+      protocol: TCP
+      port: 80
+    - name: open5gs-my5grantester-tcp-3000
+      protocol: TCP
+      port: 3000
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,10 +49,12 @@ spec:
               #timeout: 5s
               #retries: 5
         volumeMounts:
-        - name: my5grantester-config
+        - name: open5gs-my5grantester-config
             # mountPath: /etc/my5grantester-config.yaml
           mountPath: /open5gs/config-map/my5grantester-config.yaml
           subPath: "my5grantester-config.yaml"
+          #command: ["./app load-test-parallel -n $NUM_UEs -d $SLEEP_CONN -t $START_DELAY -a"]
+          command: ["./app load-test-parallel -n 1000 -d 500 -t 60 -a"]
         - name: "dev-net-tun"
           mountPath: "/dev/net/tun" # Needed for VPN
           # command: ["./app ${TEST_PARAMETERS}"]
