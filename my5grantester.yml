@@ -66,3 +66,15 @@ spec:
         - name: dev-net-tun
           hostPath:
             path: /dev/net/tun
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open5gs-my5grantester-config
+  namespace: open5gs
+  labels:
+    epc-mode: my5grantester
+data:
+  my5grantester.yaml: |
+    logger:
+        file: /var/log/open5gs/my5grantester.log
