@@ -43,38 +43,18 @@ spec:
             privileged: true
             capabilities:
               add: ["NET_ADMIN"]
-              #healthcheck:
-              #test: /bin/bash -c "ip addr | grep uetun1"
-              #interval: 10s
-              #timeout: 5s
-              #retries: 5
           volumeMounts:
-            - name:
-                open5gs-my5grantester-config
-                # mountPath: /etc/my5grantester-config.yaml
-              mountPath: /open5gs/config-map/my5grantester-config.yaml
-              subPath: "my5grantester-config.yaml"
-              #command: ["./app load-test-parallel -n $NUM_UEs -d $SLEEP_CONN -t $START_DELAY -a"]
+            - name: open5gs-my5grantester-config
+              mountPath: /open5gs/data/my5grantester
             - name: "dev-net-tun"
               mountPath: "/dev/net/tun" # Needed for VPN
-              # command: ["./app ${TEST_PARAMETERS}"]
+          #command: ["./app load-test-parallel -n $NUM_UEs -d $SLEEP_CONN -t $START_DELAY -a"]
           command: ["./app load-test-parallel -n 1000 -d 500 -t 60 -a"]
       volumes:
         - name: open5gs-my5grantester-config
-          configMap:
-            name: open5gs-my5grantester-config
+          #configMap:
+            #name: open5gs-my5grantester-config
         - name: dev-net-tun
           hostPath:
             path: /dev/net/tun
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: open5gs-my5grantester-config
-  namespace: open5gs
-  labels:
-    epc-mode: my5grantester
-data:
-  my5grantester.yaml: |
-    logger:
-        file: /var/log/open5gs/my5grantester.log
+
